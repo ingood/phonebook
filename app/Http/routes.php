@@ -19,3 +19,14 @@ Route::get('about me', function ()
 {
 	return 'hello';
 });
+
+
+Route::get('v1', function ()
+{
+	return 'hello v1';
+});
+
+Route::get('v111', function ()
+{
+	return 'hello v111';
+});
