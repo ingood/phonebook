@@ -23,7 +23,7 @@ Route::get('about me', function ()
 
 Route::get('v1000', function ()
 {
-	return 'hello v1';
+	return 'hello v122';
 });
 
 Route::get('v111', function ()
