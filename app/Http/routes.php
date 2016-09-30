@@ -21,7 +21,7 @@ Route::get('about me', function ()
 });
 
 
-Route::get('v1', function ()
+Route::get('v1000', function ()
 {
 	return 'hello v1';
 });
