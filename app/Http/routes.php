@@ -21,7 +21,7 @@ Route::get('about me', function ()
 });
 
 
-Route::get('v1000', function ()
+Route::get('yunle', function ()
 {
 	return 'hello v122';
 });
