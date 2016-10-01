@@ -26,7 +26,4 @@ Route::get('yunle', function ()
 	return 'hello v12200';
 });
 
-Route::get('v111', function ()
-{
-	return 'hello v111';
-});
+Route::get('reports', 'ReportsController');
