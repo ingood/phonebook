@@ -15,10 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('about me', function ()
-{
-	return 'hello';
-});
+Route::get('excel/export', 'ExcelController@export');
+Route::get('excel/import', 'ExcelController@import');
 
 
 Route::get('yunle', function ()
