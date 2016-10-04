@@ -24,21 +24,26 @@ class ExcelController extends Controller
             ['10005','EEEEE','96'],
         ];
 
-        dd($cellData);
-        Excel::create('student_score1',function ($excel) use ($cellData){
+//        dd($cellData);
+        Excel::create('hh',function ($excel) use ($cellData){
             $excel->sheet('score', function ($sheet) use ($cellData){
                 $sheet->rows($cellData);
             });
-        })->store('xls')->export('xls');
+        })->store('xls');
     }
 
     public function import()
     {
-        $filePath = 'storage/exports/'.'student_score1.xls';
-        Excel::load($filePath, function ($reader){
-            $data = $reader->all();
-            dd($data);
+        $filePath = 'storage/exports/'.'hh.xls';
+        $data = [];
+        // &$data 加上 `&` 则变量为地址传递,对象外将可以调用改版的内容。
+        Excel::load($filePath, function ($reader) use (&$data) {
+//            $data = $reader->get()->toArray();
+            $data = $reader->getSheet(0)->toArray();
+//            $data=$row->firstname;
+
         });
+        dd($data);
     }
 
 }
