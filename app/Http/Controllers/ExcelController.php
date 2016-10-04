@@ -24,21 +24,22 @@ class ExcelController extends Controller
             ['10005','EEEEE','96'],
         ];
 
-        dd($cellData);
-        Excel::create('student_score1',function ($excel) use ($cellData){
+        // dd($cellData);
+        // iconv在转换字符"—"到gb2312时会出错,可以采用 `//IGNORE` 忽略转换中的错误。//TRANSLIT
+        Excel::create('hh',function ($excel) use ($cellData){
             $excel->sheet('score', function ($sheet) use ($cellData){
                 $sheet->rows($cellData);
             });
-        })->store('xls')->export('xls');
+        })->store('csv');
     }
 
     public function import()
     {
-        $filePath = 'storage/exports/'.'student_score1.xls';
+        $filePath = 'storage/exports/'.'aa.csv';
         Excel::load($filePath, function ($reader){
             $data = $reader->all();
             dd($data);
-        });
+        },"UTF-8");
     }
 
 }
