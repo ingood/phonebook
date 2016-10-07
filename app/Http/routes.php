@@ -24,7 +24,11 @@ Route::get('yunle', function ()
 	return 'hello v12200';
 });
 
+<<<<<<< HEAD
 Route::get('contacts', function ()
 {
 	return 'this is contacts';
 });
+=======
+Route::get('reports', 'ReportsController');
+>>>>>>> test/t1
