@@ -18,13 +18,4 @@ Route::get('/', function () {
 Route::get('excel/export', 'ExcelController@export');
 Route::get('excel/import', 'ExcelController@import');
 
-
-Route::get('yunle', function ()
-{
-	return 'hello v12200';
-});
-
-Route::get('contacts', function ()
-{
-	return 'this is contacts';
-});
+Route::get('contacts', 'ContactController@index');
