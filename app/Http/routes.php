@@ -19,3 +19,4 @@ Route::get('excel/export', 'ExcelController@export');
 Route::get('excel/import', 'ExcelController@import');
 
 Route::get('contacts', 'ContactController@index');
+Route::get('contacts/import', 'ContactController@import');

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Excel;
+use App\Contacts;
 
 class ExcelController extends Controller
 {
@@ -38,15 +39,19 @@ class ExcelController extends Controller
     public function import()
     {
 
-        $filePath = 'storage/exports/'.'haha.xls';
+        $filePath = 'storage/exports/'.'tttxl.xls';
         $data = [];
         // &$data 加上 `&` 则变量为地址传递,对象外将可以调用改版的内容。
         Excel::load($filePath, function ($reader) use (&$data) {
 //            $data = $reader->get()->toArray();
-            $data = $reader->getSheet(0)->toArray();
+            $data = $reader->get()->toArray();
 //            $data=$row->firstname;
         });
-        dd($data);
+//        dd($data);
+        foreach ($data as $row){
+            var_dump($row);
+            $contacts = Contacts::create($row);
+        }
     }
 
 }

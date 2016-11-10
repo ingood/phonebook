@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Excel;
+use App\Contacts;
+
 class ContactController extends Controller
 {
     /**
@@ -17,7 +20,8 @@ class ContactController extends Controller
     public function index()
     {
         //
-        return view("phonebook/contacts");
+        $contacts = Contacts::all();
+        return view("contacts/contacts",['contacts' => $contacts]);
     }
 
     /**
@@ -84,5 +88,29 @@ class ContactController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function import()
+    {
+
+        $filePath = 'storage/exports/'.'tttxl.xls';
+        $data = [];
+        // &$data 加上 `&` 则变量为地址传递,对象外将可以调用改版的内容。
+        Excel::load($filePath, function ($reader) use (&$data) {
+//            $data = $reader->get()->toArray();
+            $data = $reader->get()->toArray();
+//            $data=$row->firstname;
+        });
+//        dd($data);
+        foreach ($data as $row){
+//            var_dump($row);
+            $contacts = Contacts::create($row);
+            $contacts->nickname = '昵称';
+            if ($contacts->name == '陈斌'){
+                $contacts->name = '陈大斌';
+            }
+            $contacts->save();
+        }
+        echo "导入成功!";
     }
 }
