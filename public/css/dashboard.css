@@ -103,3 +103,19 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+/*
+ * Visy Custom
+ */
+
+#msg {
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  display: none;
+  z-index: 9999;
+  min-width: 90%;
+  margin-left: -45%;
+  text-align: center;
+  filter:alpha(Opacity=90);-moz-opacity:0.9;opacity: 0.9;
+}

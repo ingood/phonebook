@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use Excel;
 use App\Contacts;
 
+
+
 class ContactController extends Controller
 {
     /**
@@ -19,8 +21,8 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
-        $contacts = Contacts::all();
+        // 顺序取得 20 条数据,如果是倒叙,则中间加上 latest() 方法
+        $contacts = Contacts::paginate(20);
         return view("contacts/contacts",['contacts' => $contacts]);
     }
 
@@ -46,15 +48,16 @@ class ContactController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+ * Display the specified resource.
+ *
+ * @param  int  $id
+ * @return \Illuminate\Http\Response
+ */
     public function show($id)
     {
         //
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -74,9 +77,18 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        // pk 就是 contacts 表的 id, 通过前端 data-pk="{{ $contact->id }}" 设置
+        $contacts = Contacts::findOrFail($request->get('pk'));
+        $name = $request->get('name');
+        $value = $request->get('value');
+        $contacts->$name = $value;
+        if($contacts->save()){
+            return '{"status": "ok", "msg": "编辑成功!"}';
+        }else{
+            return '{"status": "error", "msg": "你的信息有误!"}';
+        }
     }
 
     /**
@@ -90,6 +102,9 @@ class ContactController extends Controller
         //
     }
 
+    /**
+     *
+     */
     public function import()
     {
 

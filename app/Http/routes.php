@@ -20,3 +20,7 @@ Route::get('excel/import', 'ExcelController@import');
 
 Route::get('contacts', 'ContactController@index');
 Route::get('contacts/import', 'ContactController@import');
+
+Route::post('contacts/update','ContactController@update');
+
+Route::post('branch/store','BranchController@store');
