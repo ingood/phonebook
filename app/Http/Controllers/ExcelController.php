@@ -30,14 +30,15 @@ class ExcelController extends Controller
         // iconv在转换字符"—"到gb2312时会出错,可以采用 `//IGNORE` 忽略转换中的错误。//TRANSLIT
 
         Excel::create('haha',function ($excel) use ($cellData){
-            $excel->sheet('score', function ($sheet) use ($cellData){
+            $excel->sheet('学生成绩', function ($sheet) use ($cellData){
                 $sheet->rows($cellData);
-            })->store('xls');
+            })->export('xls');
         });
     }
 
     public function import()
     {
+
 
         $filePath = 'storage/exports/'.'tttxl.xls';
         $data = [];
@@ -45,13 +46,33 @@ class ExcelController extends Controller
         Excel::load($filePath, function ($reader) use (&$data) {
 //            $data = $reader->get()->toArray();
             $data = $reader->get()->toArray();
+
 //            $data=$row->firstname;
+//            $data = $reader->dump(); // 输出读取结果,以对象的模式
+
+//            // Loop through all sheets
+//            $reader->each(function($row) {
+//                dump($row);
+//            });
+
         });
-//        dd($data);
-        foreach ($data as $row){
-            var_dump($row);
-            $contacts = Contacts::create($row);
-        }
+
+        // 选择一个指定的表
+        Excel::selectSheets('abc')->load($filePath, function ($reader) use (&$data) {
+//            $data = $reader->dump(); // 输出读取结果,以对象的模式
+        });
+
+        // 通过索引选择一个指定的表
+        Excel::selectSheetsByIndex(0)->load($filePath, function ($reader) use (&$data) {
+//            $data = $reader->dump(); // 输出读取结果,以对象的模式
+        });
+
+        // 选择表中的列
+        Excel::selectSheetsByIndex(0)->load($filePath, function ($reader) use (&$data) {
+//            $data = $reader->dump(); // 输出读取结果,以对象的模式
+            $data = $reader->get(array('name','department'));
+            dd($data);
+        });
     }
 
 }
