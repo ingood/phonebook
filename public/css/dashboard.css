@@ -110,12 +110,134 @@ body {
 
 #msg {
   position: absolute;
-  top: 0px;
+  top: 10px;
   left: 50%;
   display: none;
   z-index: 9999;
-  min-width: 90%;
-  margin-left: -45%;
+  min-width: 50%;
+  margin-left: -25%;
   text-align: center;
-  filter:alpha(Opacity=90);-moz-opacity:0.9;opacity: 0.9;
+  background: #B2EEF1;
+  color: #00969F;
+  border: none;
+  /*border-radius: 0px;*/
+  /*filter:alpha(Opacity=95);-moz-opacity:0.95;opacity: 0.95;*/
+}
+.navbar-inverse{
+  background: #006758;
+}
+.navbar-inverse .navbar-brand{
+  color: #8FCDB8;
+}
+.navbar-inverse .navbar-nav>li>a {
+  color: #8FCDB8;
+}
+a{
+  color: #333;
+}
+.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
+  background-color: #009788;
+  border-color: #009788;
+}
+.pagination>li>a, .pagination>li>span {
+  color: #009788;
+}
+.nav-sidebar > .active > a, .nav-sidebar > .active > a:hover, .nav-sidebar > .active > a:focus {
+  background-color: #009C66;
+}
+a:hover, a:focus {
+  color: #009C66;
+}
+.sidebar{
+  padding: 15px 0px;
+}
+.list-group{
+
+}
+.list-group-item{
+  padding: 8px 10px;
+}
+.sidebar .editbtn {
+  position: absolute;
+  display: none;
+  right: 28px;
+  top: 10px;
+  /*display: inline-block;*/
+  padding: 1px;
+  font-size: 12px;
+  line-height: 1;
+  color: #009C66;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  background: #FFF;
+  min-width: 10px;
+  border-radius: 10px;
+}
+.sidebar .editbtn.add {
+  right: 10px;
+}
+a.editbtn:hover, a.editbtn:focus {
+  /*background: yellow;*/
+  color: #ac2925;
+}
+a#addbranch{
+  color: #ED6B68;
+}
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+  background-color: #019A61;
+  border-color: #019A61;
+}
+.list-group-item.active a, .list-group-item.active:hover a, .list-group-item.active:focus a {
+  color: #FFF;
+}
+a.list-group-item:hover, a.list-group-item:focus {
+  color: #FFF;
+  text-decoration: none;
+  background-color: #019A61;
+}
+.list-group-item.editable-click {
+  border: 1px dashed #0088cc;
+}
+#nav-branch .input-sm, #nav-branch .form-group-sm .form-control {
+  height: auto;
+  padding: 8px 0px;
+  padding-left: 10px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 0px;
+}
+#nav-branch .editable-clear-x {
+  right: 22px;
+}
+#branchset{
+  width:100%;
+  left:0px;
+  right: 0px;
+  bottom: 0px;
+  height: 58px;
+  overflow: hidden;
+  position: absolute;
+  margin: 0px;
+  border:solid 0 transparent;
+  border-top: 1px solid #ccc;
+  background: #fff;
+}
+#branchset span ,#branchset i {
+  overflow: hidden;
+  position: absolute;
+  margin: 0px;
+  cursor: pointer;
+  border: 0px none;
+  vertical-align: top;
+  font-size: 22px;
+  color: #666;
+  margin-top: -13px;
+  top: 50%;
+}
+#branchset i.icon-plus{
+  right:12px;
+}
+#branchset i.icon-settings{
+  left:12px;
 }
