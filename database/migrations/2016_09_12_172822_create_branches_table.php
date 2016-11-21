@@ -15,7 +15,7 @@ class CreateBranchesTable extends Migration
         //
         Schema::create('branches',function (Blueprint $table){
             $table->increments('id');
-            $table->integer('parent_id')->comment('父机构id');
+            $table->integer('parent_id')->unsigned()->comment('父机构id');
             $table->string('name')->comment('部门名称');
             $table->string("branch")->comment('所属机构');
             $table->integer('ordering')->comment('排序');

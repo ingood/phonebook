@@ -41,7 +41,8 @@ class BranchController extends Controller
     {
         //
         $branch = new Branch();
-        $branch->name = $request->get('value');
+        $branch->name = $request->get('value')?$request->get('value'):$request->get('newBranchName');
+        $branch->parent_id = $request->get('parentBranchName')?$request->get('parentBranchName'):0;
         if($branch->save()){
             return '{"status": "ok", "msg": "添加成功!", "name":"'.$branch->name.'","id":'.$branch->id.'}';
         }else{

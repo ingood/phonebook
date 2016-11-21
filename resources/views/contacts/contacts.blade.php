@@ -113,14 +113,38 @@
     </ul>
     <div class="row">
         <div class="col-sm-2 col-md-2 sidebar">
-            <div class="list-group" id="nav-branch">
+            <div class="list-group" id="nav-branch" style="overflow: auto; ">
                 @foreach($branches as $branch)
                     <a href="javascript:void(0);" class="branchname list-group-item" data-name="name"
                        class="branchname"
-                       data-pk="{{$branch->id}}"
-                       data-title="部门名称">{{ $branch->name }}</a>
+                       data-pk="{{$branch["id"]}}"
+                       data-title="部门名称">{{ $branch["name"] }}</a>
+                    @if(isset($branch['subBranches']) and is_array($branch["subBranches"]))
+                        @foreach($branch['subBranches'] as $subBranch)
+                            <a href="javascript:void(0);" class="branchname list-group-item pdl2" data-name="name"
+                               class="branchname"
+                               data-pk="{{$subBranch["id"]}}"
+                               data-title="部门名称">{{ $subBranch["name"] }}</a>
+                            @if(isset($subBranch['subBranches']) and is_array($subBranch["subBranches"]))
+                                @foreach($subBranch['subBranches'] as $sub2Branch)
+                                    <a href="javascript:void(0);" class="branchname list-group-item pdl3" data-name="name"
+                                       class="branchname"
+                                       data-pk="{{$sub2Branch["id"]}}"
+                                       data-title="部门名称">{{ $sub2Branch["name"] }}</a>
+                                    @if(isset($sub2Branch['subBranches']) and is_array($sub2Branch["subBranches"]))
+                                        @foreach($sub2Branch['subBranches'] as $sub3Branch)
+                                            <a href="javascript:void(0);" class="branchname list-group-item pdl4" data-name="name"
+                                               class="branchname"
+                                               data-pk="{{$sub3Branch["id"]}}"
+                                               data-title="部门名称">{{ $sub3Branch["name"] }}</a>
+                                        @endforeach
+                                    @endif
+                                @endforeach
+                            @endif
+                        @endforeach
+                    @endif
                 @endforeach
-                @if( !empty($isAdmin) and ($isAdmin == true) )
+                @if( !empty($isAdmin) and ($isAdmin == true) and 0)
                     <a href="javascript:void(0);" id="addbranch" data-title="新增单位/部门" class="branchname list-group-item">
                         新增单位/部门<span class="glyphicon glyphicon-plus-sign"></span>
                     </a>
@@ -163,22 +187,39 @@
                     <h4 class="modal-title">新增单位/部门</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="" role="form">
+                    <form id="newBranchForm" action="" role="form">
                         <div class="form-group"><label for="newBranchName">新单位名称</label><input type="text"
                                                                                                class="form-control"
                                                                                                id="newBranchName"
+                                                                                               name="newBranchName"
                                                                                                placeholder="请输入新单位名称">
                         </div>
                         <div class="form-group"><label for="parentBranchName">上级单位名称</label><select name="parentBranchName" id="parentBranchName" class="form-control selectpicker">
                                 @foreach($branches as $branch)
-                                <option value="$branch->id">{{$branch->name}}</option>
+                                <option value="{{$branch['id']}}">{{$branch['name']}}</option>
+                                    @if(isset($branch['subBranches']) and is_array($branch['subBranches']))
+                                        @foreach($branch['subBranches'] as $subBranch)
+                                            <option value="{{$subBranch['id']}}">&emsp;{{$subBranch['name']}}</option>
+                                            @if(isset($subBranch['subBranches']) and is_array($subBranch['subBranches']))
+                                                @foreach($subBranch['subBranches'] as $sub2Branch)
+                                                    <option value="{{$sub2Branch['id']}}">&emsp;&emsp;{{$sub2Branch['name']}}</option>
+                                                    @if(isset($sub2Branch['subBranches']) and is_array($sub2Branch['subBranches']))
+                                                        @foreach($sub2Branch['subBranches'] as $sub3Branch)
+                                                            <option value="{{$sub3Branch['id']}}">&emsp;&emsp;&emsp;{{$sub3Branch['name']}}</option>
+
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                    @endif
                                 @endforeach
                             </select></div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">保存</button>
+                    <button id="addBranchBtn" type="button" class="btn btn-primary">保存</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -188,7 +229,7 @@
 <div id="msg" class="alert">
     <strong>提示: </strong><span></span>
 </div>
-<div id="editbtn" style="display: none;"><span pk="{{$branch->id}}" class="glyphicon glyphicon-plus editbtn add"></span><span pk="{{$branch->id}}" class="glyphicon glyphicon-remove editbtn remove"></span></div>
+<div id="editbtn" style="display: none;"><span pk="{{$branch['id']}}" class="glyphicon glyphicon-plus editbtn add"></span><span pk="{{$branch['id']}}" class="glyphicon glyphicon-remove editbtn remove"></span></div>
 
 
 <!-- Bootstrap core JavaScript

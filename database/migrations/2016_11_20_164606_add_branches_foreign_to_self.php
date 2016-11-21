@@ -14,6 +14,7 @@ class AddBranchesForeignToSelf extends Migration
     {
         Schema::table('branches', function (Blueprint $table) {
             //
+
         });
     }
 

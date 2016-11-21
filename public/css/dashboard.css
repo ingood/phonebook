@@ -241,3 +241,33 @@ a.list-group-item:hover, a.list-group-item:focus {
 #branchset i.icon-settings{
   left:12px;
 }
+.pdl1{
+  padding-left: 1em;
+}
+.pdl2{
+  padding-left: 2em;
+}
+.pdl3{
+  padding-left: 3em;
+}
+.pdl4{
+  padding-left: 4em;
+}
+.pdl5{
+  padding-left: 5em;
+}
+.pdl6{
+  padding-left: 6em;
+}
+.pdl7{
+  padding-left: 7em;
+}
+.pdl8{
+  padding-left: 8em;
+}
+.pdl9{
+  padding-left: 9em;
+}
+.pdl10{
+  padding-left: 10em;
+}

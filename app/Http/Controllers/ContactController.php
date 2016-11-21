@@ -23,7 +23,9 @@ class ContactController extends Controller
     {
         // 顺序取得 20 条数据,如果是倒叙,则中间加上 latest() 方法
         $contacts = Contacts::paginate(20);
-        $branches = Branch::get();
+        $branch =new Branch;
+        $branches = $branch->getTree();
+//        dd($branches);
         $isAdmin = true;
         return view("contacts/contacts", compact('contacts', 'branches', 'isAdmin'));
     }
