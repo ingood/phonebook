@@ -27,19 +27,24 @@ $(function () {
     oButtonInit.Init();
 
     // 侧边栏单位导航部分的实际高度初始化
-    $('#nav-branch').height(getHeight()-78);
+    if(isAdmin == true) $('#nav-branch').height(getHeight()-78);
     // 窗口变化时改变表格和侧边栏的现实高度
     $(window).resize(function () {
         $("#tb_contacts").bootstrapTable('resetView', {
             height: getHeight()
         });
-        $('#nav-branch').height(getHeight()-78);
-        console.log($('#nav-branch').height());
+        if(isAdmin == true) $('#nav-branch').height(getHeight()-78);
+        // console.log($('#nav-branch').height());
     });
 
 
     // 非管理状态时的页面操作
     if (isAdmin == false) {
+
+        $(window).resize(function () {
+            $('#nav-branch').height(getHeight());
+        });
+
         /**
          * 点击 branch 名称,调用后台数据刷新列表内容
          */
@@ -523,9 +528,14 @@ $(document).ready(function () {
         $.post('/branch/store', $('#newBranchForm').serialize(),
             function (res) {
                 topAlert("新增部门<" + res.name + ">成功!");
-                $("#parentBranchName option[value="+pbid+"]").after('<option value="'+res.id+'"> &emsp;'+res.name+'</option>');
-                $('#nav-branch a[data-pk='+pbid+']').after('<a href="javascript:void(0);" class="branchname list-group-item pdl1" data-name="name" data-pk="'+res.id+'" data-title="'+res.name+'">'+res.name+'</a>');
-            },"json");
+                if (pbid>0) {
+                     $("#parentBranchName option[value="+pbid+"]").after('<option value="'+res.id+'"> &emsp;'+res.name+'</option>');
+                    $('#nav-branch a[data-pk='+pbid+']').after('<a href="javascript:void(0);" class="branchname list-group-item pdl2" data-name="name" data-pk="'+res.id+'" data-title="'+res.name+'">'+res.name+'</a>');
+                }else{
+                    $("#parentBranchName").append('<option value="'+res.id+'"> '+res.name+'</option>');
+                    $('#nav-branch').append('<a href="javascript:void(0);" class="branchname list-group-item" data-name="name" data-pk="'+res.id+'" data-title="'+res.name+'">'+res.name+'</a>');
+                }
+               },"json");
     });
 
 });

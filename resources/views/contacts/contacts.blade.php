@@ -44,7 +44,7 @@
                 <span class="imcon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">国网浙江天台县供电公司通讯录</a>
+            <a class="navbar-brand" href="/">国网浙江天台县供电公司通讯录</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -150,7 +150,9 @@
                     </a>
                 @endif
             </div>
+            @if(!empty($isAdmin) and ($isAdmin == true) )
             <div id="branchset"><i class="icon-settings"></i><i class="icon-plus" data-toggle="modal" data-target="#newBranchModal"></i></div>
+            @endif
         </div>
         {{-- 主体表格开始 --}}
         <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 ajaxtable">
@@ -195,6 +197,7 @@
                                                                                                placeholder="请输入新单位名称">
                         </div>
                         <div class="form-group"><label for="parentBranchName">上级单位名称</label><select name="parentBranchName" id="parentBranchName" class="form-control selectpicker">
+                                <option value="0">请选择上级机构名称</option>
                                 @foreach($branches as $branch)
                                 <option value="{{$branch['id']}}">{{$branch['name']}}</option>
                                     @if(isset($branch['subBranches']) and is_array($branch['subBranches']))
@@ -229,8 +232,9 @@
 <div id="msg" class="alert">
     <strong>提示: </strong><span></span>
 </div>
-<div id="editbtn" style="display: none;"><span pk="{{$branch['id']}}" class="glyphicon glyphicon-plus editbtn add"></span><span pk="{{$branch['id']}}" class="glyphicon glyphicon-remove editbtn remove"></span></div>
-
+@if(!empty($isAdmin) and ($isAdmin == true) )
+<div id="editbtn" style="display: none;"><span pk="" class="glyphicon glyphicon-plus editbtn add"></span><span pk="" class="glyphicon glyphicon-remove editbtn remove"></span></div>
+@endif
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

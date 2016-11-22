@@ -26,7 +26,7 @@ class ContactController extends Controller
         $branch =new Branch;
         $branches = $branch->getTree();
 //        dd($branches);
-        $isAdmin = true;
+        $isAdmin = false;
         return view("contacts/contacts", compact('contacts', 'branches', 'isAdmin'));
     }
 

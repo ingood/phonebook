@@ -42,10 +42,11 @@ class ExcelController extends Controller
 
         $filePath = 'storage/exports/'.'tttxl.xls';
         $data = [];
-        // &$data 加上 `&` 则变量为地址传递,对象外将可以调用改版的内容。
+        // &$data 加上 `&` 则变量为地址传递,对象外将可以调用改变的内容。
         Excel::load($filePath, function ($reader) use (&$data) {
 //            $data = $reader->get()->toArray();
             $data = $reader->get()->toArray();
+            // dd($data);
 
 //            $data=$row->firstname;
 //            $data = $reader->dump(); // 输出读取结果,以对象的模式
@@ -56,6 +57,10 @@ class ExcelController extends Controller
 //            });
 
         });
+        foreach ($data as $key => $value) {
+            $contacts = Contacts::create($value);
+        }
+        
 
         // 选择一个指定的表
         Excel::selectSheets('abc')->load($filePath, function ($reader) use (&$data) {
